@@ -13,6 +13,10 @@ typedef struct Produto{
   int quantidade;
 }Produto;
 
+void print_produto(Produto x){
+  printf("{codigo: %d, descricao: %s, valor: %.02f, quantidade: %d}\n", x.codigo,x.descricao,x.valor,x.quantidade);
+}
+
 // DEFINICAO DO TIPO CELULA
 typedef struct Celula{
   Produto dado;
@@ -39,6 +43,26 @@ void new_lista(Lista *f){
   f->inicio = nova;
   f->fim = nova;
   f->tam = 0;
+}
+
+void add_lista(Lista *f,Produto dado){
+
+  Celula *nova = new_celula();
+  nova->dado = dado;
+
+  f->fim->prox = nova;
+  f->fim = nova;
+  f->tam++;
+}
+
+void print_lista(Lista *f){
+
+  Celula *tmp = f->inicio->prox;
+
+  while(tmp != NULL){
+    print_produto(tmp->dado);
+    tmp = tmp->prox;
+  }
 }
 
 #endif
